@@ -1,27 +1,16 @@
 import {Category} from "@/types/category";
 import AppLayout from "@/layouts/app-layout";
-import {Head} from "@inertiajs/react";
-import {Field, FieldGroup, FieldLabel} from "@/components/ui/field";
-import {Input} from "@/components/ui/input";
-import {Textarea} from "@/components/ui/textarea";
-import {Button} from "@/components/ui/button";
+import { Head } from "@inertiajs/react";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import React from "react";
-import {useForm, Form} from "@inertiajs/react";
+import { Form } from "@inertiajs/react";
 import { update } from '@/actions/App/Http/Controllers/CategoryController';
 
 
 export default function EditCategory({ category }: { category: Category }) {
-
-    /*const { data, setData, errors, put } = useForm({
-        'name': '',
-        'description': ''
-    });*/
-
-   /* const handleSubmit = (evt: React.SubmitEvent) => {
-        evt.preventDefault();
-        put(`/categories/${category.id}`);
-    }*/
-
     return (
         <AppLayout>
             <Head title={`Edit ${category.name}`} />

@@ -6,7 +6,6 @@ import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { useForm, usePage } from "@inertiajs/react";
 import React from "react";
-import { toast } from 'sonner';
 
 export default function Create() {
     const { post, data, setData, errors } = useForm({
@@ -21,7 +20,7 @@ export default function Create() {
         console.log(data)
         post('/categories');
     }
-console.log(flash.toast)
+
     return (
       <AppLayout>
           <Head title="Add new category" />
