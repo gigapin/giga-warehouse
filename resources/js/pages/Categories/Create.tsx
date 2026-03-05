@@ -1,11 +1,11 @@
 import { Head } from '@inertiajs/react';
+import { useForm, usePage } from "@inertiajs/react";
+import React from "react";
 import { Button } from '@/components/ui/button';
 import { Field, FieldLabel, FieldGroup } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { useForm, usePage } from "@inertiajs/react";
-import React from "react";
 
 export default function Create() {
     const { post, data, setData, errors } = useForm({

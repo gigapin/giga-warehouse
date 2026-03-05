@@ -1,7 +1,7 @@
-import { Category } from "@/types/category";
 import { Head } from "@inertiajs/react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import AppLayout from "@/layouts/app-layout";
+import type { Category } from "@/types/category";
 
 
 export default function ShowCategory({ category }: { category: Category }) {

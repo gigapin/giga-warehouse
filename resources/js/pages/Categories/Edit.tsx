@@ -1,13 +1,12 @@
-import {Category} from "@/types/category";
-import AppLayout from "@/layouts/app-layout";
 import { Head } from "@inertiajs/react";
+import { Form } from "@inertiajs/react";
+import { update } from '@/actions/App/Http/Controllers/CategoryController';
+import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import React from "react";
-import { Form } from "@inertiajs/react";
-import { update } from '@/actions/App/Http/Controllers/CategoryController';
+import AppLayout from "@/layouts/app-layout";
+import type { Category } from "@/types/category";
 
 
 export default function EditCategory({ category }: { category: Category }) {
