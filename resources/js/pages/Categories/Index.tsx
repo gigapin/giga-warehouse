@@ -8,7 +8,7 @@ import {
     edit,
     destroy,
 } from '@/actions/App/Http/Controllers/CategoryController';
-import { Button } from '@/components/ui/button';
+import CustomLink from '@/components/app/custom-link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -39,10 +39,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Index({ categories }: { categories: Category[] }) {
-    const handleCreateCategory = () => {
-        create();
-    };
-
     const dateString = (item: Date) => {
         const d = new Date(item);
         return d.toISOString().split('T')[0];
@@ -54,17 +50,11 @@ export default function Index({ categories }: { categories: Category[] }) {
             <div className="flex">
                 <div className="flex items-center text-2xl">Categories</div>
                 <div className="ml-auto flex items-center">
-                    <Button className="pointer" onClick={handleCreateCategory}>
-                        Add Category
-                    </Button>
+                    <CustomLink label="Add category" href={create()} />
                 </div>
             </div>
             <div className="mx-auto max-w-4xl py-8 sm:py-16 lg:py-20">
                 <Card className="w-full overflow-hidden rounded-md border-0 pb-0">
-                    {/*<CardHeader>
-                        <CardTitle>{title}</CardTitle>
-                        <CardDescription>{description}</CardDescription>
-                    </CardHeader>*/}
                     <CardContent className="px-0">
                         <div className="overflow-x-auto">
                             <Table className="min-w-2xl">

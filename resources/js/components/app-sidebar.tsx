@@ -14,6 +14,8 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import { index as categoriesIndex } from '@/routes/categories';
+import { index as customersIndex } from '@/routes/customers';
+import { index as municipalitiesIndex } from '@/routes/municipalities';
 import type { NavItem } from '@/types';
 import AppLogo from './app-logo';
 
@@ -26,6 +28,16 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Categories',
         href: categoriesIndex(),
+        icon: Tag,
+    },
+    {
+        title: 'Customers',
+        href: customersIndex(),
+        icon: Tag,
+    },
+    {
+        title: 'Municipalities',
+        href: municipalitiesIndex(),
         icon: Tag,
     },
 ];
