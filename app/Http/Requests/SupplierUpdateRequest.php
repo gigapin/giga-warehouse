@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ItalianFiscalCode;
+use App\Rules\ItalianVatNumber;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SupplierUpdateRequest extends FormRequest
@@ -17,8 +19,8 @@ class SupplierUpdateRequest extends FormRequest
 
         return [
             'company_name' => 'required|string|max:100',
-            'vat_number' => 'required|string|max:11|unique:suppliers,vat_number,' . $id,
-            'fiscal_code' => 'required|string|max:16|unique:suppliers,fiscal_code,' . $id,
+            'vat_number' => ['required', 'string', new ItalianVatNumber, 'unique:suppliers,vat_number,' . $id],
+            'fiscal_code' => ['required', 'string', new ItalianFiscalCode, 'unique:suppliers,fiscal_code,' . $id],
             'municipality_id' => 'required|exists:municipalities,id',
             'address' => 'required|string',
             'sdi_code' => 'nullable|string|max:10',

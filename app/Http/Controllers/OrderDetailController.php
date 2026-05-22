@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderDetailRequest;
+use App\Http\Resources\ItemResource;
+use App\Http\Resources\OrderDetailResource;
+use App\Http\Resources\OrderResource;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -13,23 +16,21 @@ class OrderDetailController extends Controller
     public function index()
     {
         return Inertia::render('OrderDetails/Index', [
-            'orderDetails' => OrderDetail::with(['order', 'item'])->get(),
+            'orderDetails' => OrderDetailResource::collection(OrderDetail::with(['order', 'item'])->get()),
         ]);
     }
 
     public function create()
     {
         return Inertia::render('OrderDetails/Create', [
-            'orders' => Order::all(),
-            'items' => Item::all(),
+            'orders' => OrderResource::collection(Order::all()),
+            'items'  => ItemResource::collection(Item::all()),
         ]);
     }
 
     public function store(OrderDetailRequest $request)
     {
-        $data = $request->validated();
-
-        OrderDetail::create($data);
+        OrderDetail::create($request->validated());
 
         return redirect()->route('order-details.index');
     }
@@ -37,30 +38,29 @@ class OrderDetailController extends Controller
     public function show(OrderDetail $orderDetail)
     {
         return Inertia::render('OrderDetails/Show', [
-            'orderDetail' => $orderDetail->load(['order', 'item']),
+            'orderDetail' => new OrderDetailResource($orderDetail->load(['order', 'item'])),
         ]);
     }
 
     public function edit(OrderDetail $orderDetail)
     {
         return Inertia::render('OrderDetails/Edit', [
-            'orderDetail' => $orderDetail,
-            'orders' => Order::all(),
-            'items' => Item::all(),
+            'orderDetail' => new OrderDetailResource($orderDetail),
+            'orders'      => OrderResource::collection(Order::all()),
+            'items'       => ItemResource::collection(Item::all()),
         ]);
     }
 
     public function update(OrderDetailRequest $request, OrderDetail $orderDetail)
     {
-        $data = $request->validated();
-
-        $orderDetail->update($data);
+        $orderDetail->update($request->validated());
 
         return redirect()->route('order-details.index');
     }
 
     public function destroy(OrderDetail $orderDetail)
     {
+        $this->authorize('delete', $orderDetail);
         $orderDetail->delete();
 
         return redirect()->route('order-details.index');

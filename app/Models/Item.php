@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Item extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'name',
         'description',
@@ -16,6 +20,11 @@ class Item extends Model
         'safety_stock',
         'available_stock',
     ];
+
+    public function scopeBelowSafetyStock(Builder $query): Builder
+    {
+        return $query->whereColumn('available_stock', '<', 'safety_stock');
+    }
 
     public function category()
     {

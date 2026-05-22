@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MunicipalityRequest;
+use App\Http\Resources\MunicipalityResource;
 use App\Models\Municipality;
 use Inertia\Inertia;
 
@@ -10,7 +11,9 @@ class MunicipalityController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Municipalities/Index', ['municipalities' => Municipality::all()]);
+        return Inertia::render('Municipalities/Index', [
+            'municipalities' => MunicipalityResource::collection(Municipality::all()),
+        ]);
     }
 
     public function create()
@@ -20,34 +23,35 @@ class MunicipalityController extends Controller
 
     public function store(MunicipalityRequest $request)
     {
-        $data = $request->validated();
-
-        Municipality::create($data);
+        Municipality::create($request->validated());
 
         return redirect()->route('municipalities.index');
     }
 
     public function show(Municipality $municipality)
     {
-        return Inertia::render('Municipalities/Show', ['municipality' => $municipality]);
+        return Inertia::render('Municipalities/Show', [
+            'municipality' => new MunicipalityResource($municipality),
+        ]);
     }
 
     public function edit(Municipality $municipality)
     {
-        return Inertia::render('Municipalities/Edit', ['municipality' => $municipality]);
+        return Inertia::render('Municipalities/Edit', [
+            'municipality' => new MunicipalityResource($municipality),
+        ]);
     }
 
     public function update(MunicipalityRequest $request, Municipality $municipality)
     {
-        $data = $request->validated();
-
-        $municipality->update($data);
+        $municipality->update($request->validated());
 
         return redirect()->route('municipalities.index');
     }
 
     public function destroy(Municipality $municipality)
     {
+        $this->authorize('delete', $municipality);
         $municipality->delete();
 
         return redirect()->route('municipalities.index');
