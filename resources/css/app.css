@@ -132,6 +132,25 @@
     --sidebar-ring: oklch(0.439 0 0);
 }
 
+/* Warehouse dashboard design tokens */
+:root {
+    --wms-ink: #161616;
+    --wms-ink-2: #3a3a3a;
+    --wms-ink-3: #6b6b6b;
+    --wms-ink-4: #9a9a9a;
+    --wms-panel: #ffffff;
+    --wms-panel-2: #f6f6f6;
+    --wms-line: #e2e2e2;
+    --wms-line-strong: #cfcfcf;
+    --wms-sidebar: #1a1b1d;
+    --wms-sidebar-ink: #c9c9cb;
+    --wms-sidebar-ink-dim: #7a7b7e;
+    --wms-accent: #c97a2b;
+    --wms-ok: #3f7a4a;
+    --wms-danger: #b94a3d;
+    --wms-bg: #ececec;
+}
+
 @layer base {
     * {
         @apply border-border;
@@ -139,5 +158,10 @@
 
     body {
         @apply bg-background text-foreground;
+        font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
     }
+}
+
+.sidebar-nav-item:hover {
+    background: #232427 !important;
 }
